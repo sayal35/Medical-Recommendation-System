@@ -1,23 +1,32 @@
 from predict import predict_disease, symptoms_dict
 from recommendation import get_recommendation
+import re
 
-# CLEAN TEXT NORMALIZATION
+# CLEAN INPUT TEXT
 def normalize(text):
-    return " ".join(text.lower().strip().split())
+    text = text.lower()
+    text = re.sub(r"[^a-z]", " ", text)   # remove _, commas, numbers, etc.
+    text = " ".join(text.split())         # remove extra spaces
+    return text
 
-# SYMPTOM EXTRACTION (FIXED)
-def extract_symptoms(user_input):
 
-    user_input = normalize(user_input)
+# EXTRA STRONG NORMALIZATION (for matching)
+def normalize_key(text):
+    return re.sub(r"[^a-z]", "", text.lower())  # removes EVERYTHING non-letter
+
+
+def extract_symptoms(user_input, symptoms_dict):
+
+    user_input_clean = normalize_key(user_input)
 
     matched = set()
 
     for symptom in symptoms_dict.keys():
 
-        phrase = symptom.replace("_", " ")
+        symptom_clean = normalize_key(symptom)
 
-        # strict phrase match
-        if phrase in user_input:
+        # match anywhere in text
+        if symptom_clean in user_input_clean:
             matched.add(symptom)
 
     return list(matched)
@@ -27,7 +36,7 @@ def run_system():
 
     raw_input = input("Enter symptoms: ")
 
-    user_symptoms = extract_symptoms(raw_input)
+    user_symptoms = extract_symptoms(raw_input, symptoms_dict)  
 
     print("\nUser Symptoms:", user_symptoms)
 
@@ -55,7 +64,6 @@ def run_system():
 
     print("\n--- WORKOUT ---")
     print(result["workout"])
-
 
 if __name__ == "__main__":
     run_system()
