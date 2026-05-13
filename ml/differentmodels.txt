@@ -1,0 +1,77 @@
+import os
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+# from sklearn.datasets import make_classification
+from sklearn.svm import SVC
+# from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+# from sklearn.neighbors import KNeighborsClassifier
+# from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score, confusion_matrix
+import numpy as np
+import pickle
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(BASE_DIR, "datasets", "Training.csv")
+
+df = pd.read_csv(file_path)
+# print(df.head()) #print first 5 rows of the dataframe
+# print(df.shape) #number of rows and columns
+# print(len(df['prognosis'].unique())) #unique values in prognosis column
+
+X=df.drop(columns=['prognosis'])
+y=df['prognosis']
+# print(X.head()) #print first 5 rows of the features
+# print(y.head()) #print first 5 rows of the target variable
+
+le= LabelEncoder()
+Y= le.fit_transform(y)
+
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
+# print(X_train.shape) #number of rows and columns in training features
+# print(X_test.shape) #number of rows and columns in testing features
+# print(y_train.shape) #number of rows in training target variable
+# print(y_test.shape) #number of rows in testing target variable
+
+#create a dictionary to store the models
+# models={
+#     "SVM": SVC(kernel='linear', random_state=42),
+#     "RandomForest": RandomForestClassifier(n_estimators=100, random_state=42),
+#     "GradientBoosting": GradientBoostingClassifier(n_estimators=100, random_state=42),
+#     "KNN": KNeighborsClassifier(n_neighbors=5),
+#     "Naive Bayes": MultinomialNB()
+# } 
+
+# for model_name, model in models.items():
+#     # print(f"Training {model_name}... {model}")
+#     #train model
+#     model.fit(X_train, y_train)
+
+#     #model test
+#     predictions= model.predict(X_test)
+
+#     #calculate accuracy
+#     accuracy=accuracy_score(y_test,predictions)
+
+#     #confusion matrix
+#     cm= confusion_matrix(y_test,predictions)
+
+#     print(f"{model_name} Accuracy: {accuracy}")
+#     print(f"{model_name} Confusion Matrix:")
+#     print(np.array2string(cm,separator=', '))
+
+
+svc= SVC(kernel='linear', random_state=42)
+svc.fit(X_train, y_train)
+y_pred= svc.predict(X_test)
+accuracy=accuracy_score(y_test,y_pred)
+cm= confusion_matrix(y_test,y_pred)
+print(f"SVM Accuracy: {accuracy}")
+
+#saving model
+pickle.dump(svc,open("models/svc_model.pkl","wb"))
+
+#load model
+svc= pickle.load(open("models/svc_model.pkl","rb"))
+
+
