@@ -21,11 +21,10 @@ y_pred= svc.predict(X_test)
 #evaluate model's accuracy
 accuracy= accuracy_score(y_test, y_pred)
 
-#create models folder 
-os.makedirs("models", exist_ok=True)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.join(BASE_DIR, "models")
 
-#save model
-pickle.dump(svc, open("models/svc_model.pkl", "wb"))
+os.makedirs(MODEL_DIR, exist_ok=True)
 
-#save label encoder
-pickle.dump(le, open("models/label_encoder.pkl", "wb"))
+pickle.dump(svc, open(os.path.join(MODEL_DIR, "svc_model.pkl"), "wb"))
+pickle.dump(le, open(os.path.join(MODEL_DIR, "label_encoder.pkl"), "wb"))

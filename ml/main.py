@@ -1,3 +1,6 @@
+#terminal testing
+
+
 from predict import predict_disease, symptoms_dict
 from recommendation import get_recommendation
 import re

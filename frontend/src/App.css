@@ -1,0 +1,272 @@
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+}
+
+/* =========================
+   HEADER (NEW)
+========================= */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #0f172a;
+  border-bottom: 1px solid #1f2937;
+}
+
+.header .logo {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.nav a {
+  margin-left: 20px;
+  color: #cbd5e1;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: white;
+}
+
+/* =========================
+   FOOTER (NEW)
+========================= */
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #0f172a;
+  border-top: 1px solid #1f2937;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.small {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.layout {
+  display: flex;
+  height: calc(100vh - 120px); /* adjusted for header + footer */
+}
+
+/* =========================
+   LEFT PANEL
+========================= */
+
+.leftPanel {
+  width: 30%;
+  padding: 40px;
+  background: #111827;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* IMPORTANT: fixes spacing */
+}
+
+.leftPanel h1 {
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+/* =========================
+   INPUT AREA
+========================= */
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #0f172a;
+  color: white;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #3b82f6;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+
+  margin-top: 5px;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+.loading {
+  margin-top: 10px;
+  color: #facc15;
+}
+
+/* =========================
+   RIGHT PANEL
+========================= */
+
+.rightPanel {
+  width: 70%;
+  padding: 40px;
+  overflow-y: auto;
+  background: #0b1220;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.emptyState {
+  text-align: center;
+  margin-top: 150px;
+  color: #64748b;
+}
+
+/* =========================
+   REPORT SECTION
+========================= */
+
+.report {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* HEADER CARD */
+.headerCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.badge {
+  background: #22c55e;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+  background: #111827;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  border: 1px solid #1f2937;
+}
+
+.highlight {
+  border-left: 5px solid #3b82f6;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #93c5fd;
+}
+
+/* =========================
+   GRID LAYOUT
+========================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* =========================
+   LIST STYLING
+========================= */
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 5px;
+  color: #cbd5e1;
+}
+
+
+/* CLICKABLE CARD */
+.clickable {
+  transition: 0.2s;
+}
+
+.clickable:hover {
+  transform: scale(1.02);
+  border: 1px solid #3b82f6;
+}
+
+/* MODAL BACKGROUND */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* MODAL BOX */
+.modalContent {
+  background: #111827;
+  padding: 25px;
+  width: 60%;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  border: 1px solid #1f2937;
+  color: white;
+}
+
+.modalContent h3 {
+  color: #93c5fd;
+}
+
+.modalContent ul {
+  padding-left: 20px;
+}
+
+.modalContent button {
+  background: #ef4444;
+  width: 100%;
+}

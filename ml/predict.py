@@ -5,10 +5,10 @@ import pandas as pd
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# load model
-model = pickle.load(open("models/svc_model.pkl", "rb"))
-# load encoder
-le = pickle.load(open("models/label_encoder.pkl", "rb"))
+MODEL_DIR = os.path.join(BASE_DIR, "models")  
+
+model = pickle.load(open(os.path.join(MODEL_DIR, "svc_model.pkl"), "rb"))
+le = pickle.load(open(os.path.join(MODEL_DIR, "label_encoder.pkl"), "rb"))
 
 # load training data to get feature order
 train_df = pd.read_csv(os.path.join(BASE_DIR, "datasets", "Training.csv"))
